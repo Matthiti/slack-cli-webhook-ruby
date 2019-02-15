@@ -1,4 +1,5 @@
 require 'optparse'
+require 'slack-cli-webhook'
 
 class CLI
 
@@ -18,14 +19,22 @@ class CLI
         end.parse!
 
         if !options.key?(:message)
-            raise ArgumentError, "Required attribute missing: #{:message}\nAdd -h or --help to view the usage"
+            puts "Required attribute missing: #{:message}\nAdd -h or --help to view the usage"
+            exit
         end
 
         if !options.key?(:webhook)
-            raise ArgumentError, "Required attribute missing: #{:webhook}\nAdd -h or --help to view the usage"
+            puts "Required attribute missing: #{:webhook}\nAdd -h or --help to view the usage"
+            exit
         end
 
-        puts options
+        if SlackCliWebhook.send_message(options[:message], options[:webhook])
+            puts "Message sent successfully."
+            exit
+        else
+            puts "Sending message failed, please try again later."
+            exit
+        end
     end
 
 end
