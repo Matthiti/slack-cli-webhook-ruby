@@ -6,7 +6,7 @@ class SlackCliWebhook
 
     def self.send_message(message, webhook)
         begin
-            message.sub! "\\n", "\n"
+            message.gsub! "\\n", "\n"
             puts message
             uri = URI.parse(webhook)
             header = {'Content-Type' => 'application/json'}
