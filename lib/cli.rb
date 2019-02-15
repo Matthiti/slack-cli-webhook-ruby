@@ -8,11 +8,11 @@ class CLI
         OptionParser.new do |opts|
             opts.banner = "Usage: slack-cli-webhook [options]"
 
-            opts.on("-m message", "--message message", "Message to send") do |m|
+            opts.on("-m MESSAGE", "--message MESSAGE", "Message to send") do |m|
                 options[:message] = m
             end
 
-            opts.on("-w webhook", "--webhook webhook", "Webhook to send to") do |w|
+            opts.on("-w WEBHOOK", "--webhook WEBHOOK", "Webhook to send to") do |w|
                 options[:webhook] = w
             end
 
